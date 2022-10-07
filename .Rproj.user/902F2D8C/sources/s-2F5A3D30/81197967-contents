@@ -1,0 +1,13 @@
+library(xts)
+library(zoo)
+library(here)
+#Sys.setlocale(category = "LC_ALL", locale = "C")
+
+FF <- read.table(here("ff_usa.csv"),
+                 header=TRUE,
+                 na.strings=c("-99.99","-999"),
+                 sep=";")
+head(FF)
+FF<-as.data.frame(FF)
+FF$dates <- as.yearmon(as.character(FF[,1]),format="%Y%m")
+FF$RM   <- FF$RF + FF$Mkt.RF

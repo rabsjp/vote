@@ -1,0 +1,277 @@
+\documentclass[mathserif]{beamer}
+%\documentclass[handout,mathserif]{beamer}
+\usepackage{pgfplots}
+\usepackage{graphicx}
+\usepackage{mathtools}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{fit}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{decorations.text}
+\pgfplotsset{compat=1.7}
+
+\graphicspath{{/Users/jrabanal/Dropbox/bates/324/}}
+
+\usetheme{Boadilla}
+\usecolortheme{seagull}
+
+% tikzmark command, for shading over items
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+
+% standard enumeration
+\setbeamertemplate{enumerate items}{(\arabic{enumi})}
+
+% default itemize
+\setbeamertemplate{itemize items}[circle]
+
+% transparency
+\setbeamercovered{transparent=15}
+
+% for resuming lists across frames
+\newcounter{savedenum}
+\newcommand*{\saveenum}{\setcounter{savedenum}{\theenumi}}
+\newcommand*{\resume}{\setcounter{enumi}{\thesavedenum}}
+\usenavigationsymbolstemplate{}
+
+% title
+\title{Financing Decisions}
+\subtitle{Debt and Equity}
+%\author[Prof. Rabanal]{Jean Paul Rabanal}
+%\institute[]{}
+\date{\today}
+\tikzset{
+   invisible/.style={opacity=0},
+   visible on/.style={alt=#1{}{invisible}},
+   alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+   },
+}
+
+%\includeonlyframes{daytoday}
+
+\begin{document}
+
+\begin{frame}
+   \maketitle
+
+\end{frame}
+
+\begin{frame}{Introduction}
+\begin{itemize}
+\item Debt policy is a major components of a firm financing decisions
+\item Corporate finance: can a firm (or its financial advisors) add value by changing its debt policy? If so, what factors determine a firm´s optimal capital structure?
+\item  Investments: if a firm deviates significantly from its optimal capital structure, traditional investors may sell it; activist investors may take a large stake and try to change the company´s capital structure --- in the extreme, they may take it over
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Leverage Is Irrelevant in Perfect Capital Markets}
+\begin{itemize}
+\item In 1958, two young Carnegie Mellon economists, Franco Modigliani and Merton Miller, developed a theory of capital structure that has become a major cornerstone of modern financial economics. 
+
+\item Their Proposition I states that in a perfect capital market, firm value is unaffected by changes in capital structure.
+
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Ideas behind Proposition 1}
+\begin{itemize}
+\item The level of debt determines only how the cash flows of a firm assets are split between bondholders and equityholders. The total cash flows are unchanged, so firm value must be unchanged.
+
+\item i.e., we can say that the expected return $r_A$ on the firm assets is unaffected by leverage.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Showing the MM proposition I}
+
+  Consider two firms:
+  \begin{itemize}
+  \item Generating the same stream of operating income.
+  \item Differ only in their capital structure.
+  \end{itemize}
+
+  \begin{itemize}
+  \item Firm $U$ is unlevered (no debt).
+  \item Firm $L$ is levered (has debt).
+    \begin{itemize}
+    \item Value of stock(equity): $E_L$.
+    \item Value of debt: $D_L$.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Showing the MM proposition I ctd}
+  Firm Value:
+  \begin{itemize}
+  \item Unlevered firm:
+
+    Value of equity $E_U$, same as the total value of the firm, $V_U$.
+  \item Levered firm:
+
+    Total value of the firm is $V_L=E_L+D_L$.
+  \end{itemize}
+
+\note{  We want to show that the capital structure does not affect firm value.}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Showing the MM proposition I ctd}
+  Suppose you buy a fraction $\alpha$ of the shares of firm $U$.
+
+  This costs you $\alpha V_U$ and entitles you to $\alpha \tilde X$ of the profits.
+  \begin{center}
+    \begin{tabular}{cc}
+      Investment & Cash flow \\
+      \hline
+      $\alpha V_U$ & $\alpha\tilde X $\\
+    \end{tabular}
+  \end{center}
+  \note{  Whatever the cashflows are, they flow to equity. }
+ \end{frame}
+
+\begin{frame}
+  \frametitle{Showing the MM proposition I ctd}
+  \textbf{Definition of debt}
+  \begin{itemize}
+  \item Debt is issued for one period.
+  \item Due to pay $I$, the sum of interest and principal.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Showing the MM proposition I ctd}
+ Outcomes for debt:
+  \begin{itemize}
+  \item The earnings $X$ for the firm are larger than $I$. \\
+    The bondholders get $I$.\\
+    Stockholders get $X-I$.
+  \item The earnings $X$ are not enough to cover debt service.\\
+    The firm goes bankrupt.\\
+    Bondholders receive all earnings $X$.\\
+    Stockholders get nothing.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Showing the MM proposition I ctd}
+  \textbf{Investment in Levered firm}
+  Alternative strategy to investing in equity of unlevered
+  firm:
+
+  Purchase a fraction $\alpha$ of both the debt and the equity of firm $L$.
+  \begin{center}
+    \begin{tabular}{ccc}
+      & Investment & Cash flow \\
+      \hline
+      & $\alpha D_L $&$ \alpha\min[\tilde X,I] $\\
+      & $\alpha E_L$ &$ \alpha\max[\tilde X-I,0] $\\
+      \hline
+      Total Payoff & $\alpha V_L$ &$ \alpha\tilde X $ \\ \hline
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Showing the MM proposition I ctd}
+  \textbf{Compare the two investments.}
+  \begin{center}
+    \begin{tabular}{lcc}
+      & Investment & Cash flow \\
+      \hline
+      Unlevered & $\alpha V_U$ & $\alpha\tilde X $\\
+      \hline
+      \hline
+      Levered&$\alpha D_L $&$ \alpha\min[\tilde X,I] $\\
+      &$\alpha E_L$ &$ \alpha\max[\tilde X-I,0] $\\
+      \hline
+      &$\alpha V_L$ &$ \alpha\tilde X $\\ \hline \hline
+    \end{tabular}
+  \end{center}
+
+  Both investment strategies offer the same payoff, $\alpha\tilde X$.
+\end{frame}
+\begin{frame}
+  \frametitle{Showing the MM proposition I ctd}
+
+  We now appeal to what we call a {\em no-arbitrage\/} argument:
+
+  {\em In well-functioning capital markets, two investments that offer identical future cash flows
+    must have the same value today. }
+
+  Both investment strategies give future cashflows $\alpha X$.
+
+  Therefore, they have the same values today,
+  \[\alpha V_U = \alpha V_L \ ( \ =\alpha E_L+\alpha D_D\ ).\]
+
+  The value of the levered firm must equal the value of the unlevered firm, $V_U=V_L$.
+
+  That was what we wanted to show:
+
+  {\bf Result}: (MM proposition I) {\em In a perfect capital market, the value of the firm is
+    independent of its capital structure.}
+
+\end{frame}
+
+\input{DebtEquity50AsExample}
+%\input{cap_structure_showing_basic_mm_proposition}
+\input{applying_mm_without_taxes}
+\input{cap_structure_tax_effects}
+\input{balancing_introduction}
+\input{interactions_debt_equity_in_financing}
+\input{bankruptcy_costs}
+%\input{financial_distress_without_bankruptcy}
+%%\input{non_debt_tax_shields}
+%\input{capital_structure_rules_of_thumb}
+%\input{debt_equity_as_options.tex}
+
+
+
+
+\end{document}
+
+\begin{frame}{}
+\begin{itemize}
+\item 
+\end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{}
+\begin{itemize}
+\item 
+\end{itemize}
+\end{frame}
+\begin{frame}{}
+\begin{itemize}
+\item 
+\end{itemize}
+\end{frame}
+\begin{frame}{}
+\begin{itemize}
+\item 
+\end{itemize}
+\end{frame}
+\begin{frame}{}
+\begin{itemize}
+\item 
+\end{itemize}
+\end{frame}
+
+
+
+
+
