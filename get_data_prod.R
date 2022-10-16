@@ -6,8 +6,8 @@ library(haven)
 library(xtable)
 
 # add paths to files
-file<-"voting_2022-10-03.csv"
-your_path<-here("data/011022/")
+file<-"voting_2022-10-13.csv"
+your_path<-here("data/131022/")
 d<-read.csv(paste(your_path, '/',file,sep=""),header=T, stringsAsFactors = FALSE,sep=";")
 keep.variables<-c("participant.id_in_session","player.id_in_group","player.t","player.vote"
                   ,"player.bid","player.lama","player.payoff","group.price","group.policy",
@@ -25,7 +25,7 @@ d$player.vote_cond<-NA
 d$player.vote_cond[d$player.lama>=d$player.lama_star]<-1
 d$player.vote_cond[d$player.lama<d$player.lama_star]<-0
 d$marca<-ceiling(d$subsession.round_number/4)
-save(d,file = "doct1.Rda")
+save(d,file = "doct13.Rda")
 
 #### Work only with LATE periods
 d<-d[d$marca %% 2 ==0,]

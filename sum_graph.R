@@ -6,7 +6,7 @@ library(haven)
 library(xtable)
 
 # add paths to files
-load("doct1.Rda")
+load("doct13.Rda")
 d$player.vote_1<-d$player.vote
 d$player.vote_1[d$player.vote==1]<-"Y"
 d$player.vote_1[d$player.vote==0]<-"N"
@@ -22,7 +22,7 @@ d$colores<-"#ff000"
 d$colores[d$group.policy==0]<-"#353436"
 d$ponte<-"rejected"
 d$ponte[d$group.policy==1]<-"approved"
-dp<- d %>% filter(group.uniforme==1, group.costo==20)
+dp<- d %>% filter(group.uniforme==1, group.costo==60)
 
 png(paste("sum_periods_",dp$group.uniforme[1],dp$group.costo[1],dp$session.code, ".png",sep=""), width = 600, height = 600)
 
