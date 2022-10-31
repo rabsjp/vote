@@ -6,7 +6,7 @@ library(haven)
 library(xtable)
 
 # add paths to files
-load("doct13.Rda")
+load("doct20.Rda")
 d$player.vote_1<-d$player.vote
 d$player.vote_1[d$player.vote==1]<-"Y"
 d$player.vote_1[d$player.vote==0]<-"N"
@@ -22,15 +22,15 @@ d$colores<-"#ff000"
 d$colores[d$group.policy==0]<-"#353436"
 d$ponte<-"rejected"
 d$ponte[d$group.policy==1]<-"approved"
-dp<- d %>% filter(group.uniforme==1, group.costo==60)
+dp<- d %>% filter(group.uniforme==0, group.costo==60)
 
 png(paste("sum_periods_",dp$group.uniforme[1],dp$group.costo[1],dp$session.code, ".png",sep=""), width = 600, height = 600)
 
-p<-ggplot(data=dp, aes(x=player.lama, y=player.bid)) +
+p<-ggplot(data=dp, aes(x=player.id_in_group, y=player.bid)) +
   geom_bar(stat="identity") + 
   geom_text(aes(label=player.vote_1,color=colores),size=4,position=position_stack(vjust=0.3)) +
   geom_text(aes(label=player.vote_2,color=colores),size=4,position=position_stack(vjust=0.5)) +
-  geom_line(aes(x = player.lama,
+  geom_line(aes(x = player.id_in_group,
                 y = group.price),color="black") +
   geom_text(aes(label=ponte),size=3,x=2.18,y=195) +
   xlab("") + ylab("") + ylim(0,200)+ theme(axis.ticks.x=element_blank(),axis.text.x=element_blank(),panel.background = element_rect(fill='transparent')) +

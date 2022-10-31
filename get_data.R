@@ -10,8 +10,8 @@ your_path<-here("data/090922/")
 d<-read.csv(paste(your_path, '/',"voting_2022-09-10.csv",sep=""),header=T, stringsAsFactors = FALSE,sep=",")
 keep.variables<-c("participant.id_in_session","player.id_in_group","player.t","player.vote"
                   ,"player.bid","player.lama","player.payoff","group.price","group.policy",
-                  "group.uniforme","group.costo"
-                  "subsession.round_number","session.code",)
+                  "group.uniforme","group.costo",
+                  "subsession.round_number","session.code")
 d<-d[,c(keep.variables)]
 
 dp<-read.csv(paste(your_path, '/',"pilot1708.csv",sep=""),header=T, stringsAsFactors = FALSE,sep=",")

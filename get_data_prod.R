@@ -6,16 +6,24 @@ library(haven)
 library(xtable)
 
 # add paths to files
-file<-"voting_2022-10-13.csv"
-your_path<-here("data/131022/")
-d<-read.csv(paste(your_path, '/',file,sep=""),header=T, stringsAsFactors = FALSE,sep=";")
+file<-"voting_2022-09-22.csv"
+your_path<-here("data/220922/")
+
+d<-read.csv(paste(your_path, '/',file,sep=""),header=T, stringsAsFactors = FALSE,sep=",")
 keep.variables<-c("participant.id_in_session","player.id_in_group","player.t","player.vote"
                   ,"player.bid","player.lama","player.payoff","group.price","group.policy",
                   "group.uniforme","group.costo",
                   "subsession.round_number","session.code")
 d<-d[,c(keep.variables)]
 d<-na.omit(d)
+data_survey<-read.csv(paste(your_path, '/',"survey2209.csv",sep=""),header=T, stringsAsFactors = FALSE,sep=";")
 
+keep.variables_survey<-c("participant.id_in_session","player.why_accept",
+                         "player.why_reject","player.other_accept","player.other_reject","player.age",
+                         "player.gender","player.major","player.political","player.gpa")
+data_survey<-data_survey[,c(keep.variables_survey)]
+
+d<-merge(d, data_survey, by = "participant.id_in_session")
 
 d$player.finalassets<-d$player.t+1
 d$player.vote[d$player.finalassets==0]<-NA
@@ -25,13 +33,14 @@ d$player.vote_cond<-NA
 d$player.vote_cond[d$player.lama>=d$player.lama_star]<-1
 d$player.vote_cond[d$player.lama<d$player.lama_star]<-0
 d$marca<-ceiling(d$subsession.round_number/4)
-save(d,file = "doct13.Rda")
 
+save(d,file = "dsep22.Rda")
+#####
 #### Work only with LATE periods
 d<-d[d$marca %% 2 ==0,]
 #check_vote<-cbind(check_vote,apply(check_vote,1,sum))
 
-parsito<-d$group.uniforme==1
+parsito<-d$group.uniforme==0
 check_vote<-table(d$player.vote_cond[parsito],d$player.vote,d$group.costo[parsito])
 approval_low<-tapply(d$group.policy[parsito],d$group.costo[parsito],mean,na.rm=T)
 price_low<-tapply(d$group.price[parsito],d$group.costo[parsito],median,na.rm=T)
