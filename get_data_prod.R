@@ -6,17 +6,17 @@ library(haven)
 library(xtable)
 
 # add paths to files
-file<-"voting_2022-09-22.csv"
-your_path<-here("data/220922/")
+file<-"voting_2022-11-17.csv"
+your_path<-here("data/171122/")
 
-d<-read.csv(paste(your_path, '/',file,sep=""),header=T, stringsAsFactors = FALSE,sep=",")
+d<-read.csv(paste(your_path, '/',file,sep=""),header=T, stringsAsFactors = FALSE,sep=";")
 keep.variables<-c("participant.id_in_session","player.id_in_group","player.t","player.vote"
                   ,"player.bid","player.lama","player.payoff","group.price","group.policy",
                   "group.uniforme","group.costo",
                   "subsession.round_number","session.code")
 d<-d[,c(keep.variables)]
-d<-na.omit(d)
-data_survey<-read.csv(paste(your_path, '/',"survey2209.csv",sep=""),header=T, stringsAsFactors = FALSE,sep=";")
+#d<-na.omit(d)
+data_survey<-read.csv(paste(your_path, '/',"exitq_2022-11-17.csv",sep=""),header=T, stringsAsFactors = FALSE,sep=";")
 
 keep.variables_survey<-c("participant.id_in_session","player.why_accept",
                          "player.why_reject","player.other_accept","player.other_reject","player.age",
@@ -34,7 +34,7 @@ d$player.vote_cond[d$player.lama>=d$player.lama_star]<-1
 d$player.vote_cond[d$player.lama<d$player.lama_star]<-0
 d$marca<-ceiling(d$subsession.round_number/4)
 
-save(d,file = "dsep22.Rda")
+save(d,file = "dnov17.Rda")
 #####
 #### Work only with LATE periods
 d<-d[d$marca %% 2 ==0,]
